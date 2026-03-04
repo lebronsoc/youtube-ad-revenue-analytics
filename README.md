@@ -33,20 +33,19 @@ _Will be filled in on project completion_
 _Link will be added once dashboards are complete_
 
 ## Project Structure
-youtube-ad-revenue-analytics/
-├── data/
-│   ├── raw/          ← original Opendatabay CSV
-│   └── clean/        ← cleaned CSV exported from Excel
-├── sql/
-│   ├── 01_schema.sql
-│   ├── 02_cleaning_queries.sql
-│   └── 03_analysis_queries.sql
-├── excel/
-│   └── screenshots/  ← formulas, pivot tables, forecast sheet
-└── dashboards/
-├── screenshots/  ← Looker Studio dashboard exports
-└── LINKS.md      ← live share links
-
+    youtube-ad-revenue-analytics/
+    ├── data/
+    │   ├── raw/          ← original Opendatabay CSV
+    │   └── clean/        ← cleaned CSV exported from Excel
+    ├── sql/
+    │   ├── 01_schema.sql
+    │   ├── 02_cleaning_queries.sql
+    │   └── 03_analysis_queries.sql
+    ├── excel/
+    │   └── screenshots/  ← formulas, pivot tables, forecast sheet
+    └── dashboards/
+        ├── screenshots/  ← Looker Studio dashboard exports
+        └── LINKS.md      ← live share links
 
 ## How to Reproduce
 1. Download raw CSV from `data/raw/` (or directly from Opendatabay)
