@@ -1,122 +1,223 @@
 # Video Game Sales Analytics (1971–2024)
 
-An end-to-end data analysis project exploring 50+ years of global video game sales trends, platform dominance shifts, genre evolution, and a forward-looking forecast through 2027. Built entirely on iPad Air using cloud-based tools.
+An end-to-end data analysis project examining more than **50 years of global video game sales**.  
+This project explores long-term industry trends including **platform dominance, genre evolution, regional market shifts, and publisher performance**, and includes a **statistical forecast of market trends through 2027**.
+
+The full analysis was conducted using **cloud-based tools and executed entirely on an iPad Air**.
 
 ---
 
-## Business Questions
+# Project Overview
 
-1. How have global video game sales trended across five decades — and where did the peaks and declines occur?
-2. Which genres dominated which eras, and which have declined as player preferences shifted?
-3. How has regional market share (NA, Japan, EU) shifted since the 1980s — and when did NA pull decisively ahead?
-4. Which publishers have consistently outperformed the market across multiple console generations?
-5. What do 50+ years of sales patterns predict for the global market through 2027?
+This project analyses historical video game sales data from **1971–2024**, covering over **64,000 titles** across multiple platforms, publishers, and regions.
 
----
+The goal is to understand how the video game industry has evolved over time and identify patterns that help explain **market growth, platform competition, and consumer preferences**.
 
-## Status
+The workflow includes:
 
-🚧 **In progress** — SQL analysis and Looker Studio dashboards underway
-
-> Screenshots for Excel cleaning stages and dashboard exports will be added as each phase completes.
+- Data cleaning and preparation  
+- SQL-based exploratory analysis  
+- Data visualization through dashboards  
+- Time-series forecasting  
 
 ---
 
-## Tools
+# Business Questions
+
+This analysis focuses on answering several key questions:
+
+- How have **global video game sales** changed over the past five decades?
+- Which **gaming platforms** have dominated the market at different times?
+- How has **genre popularity** evolved across console generations?
+- Which **regional markets (North America, Japan, Europe)** contribute the most to global sales?
+- Which **publishers consistently outperform the market**?
+- Based on historical trends, what might the **industry look like through 2027**?
+
+---
+
+# Project Status
+
+🚧 **In Progress**
+
+Current progress:
+
+- Dataset cleaned and structured  
+- SQL analysis queries written  
+- Early dashboards in development  
+- Forecast model created using **Excel FORECAST.ETS**
+
+Final insights and dashboard links will be added when the project is complete.
+
+---
+
+# Tools & Technologies
 
 | Layer | Tool |
-|---|---|
-| Data cleaning & forecasting | Excel (iPad) |
-| SQL analysis | PostgreSQL via Supabase |
-| Dashboards & visualization | Looker Studio |
-| Version control & portfolio | GitHub |
+|-----|-----|
+| Data Cleaning & Forecasting | Excel (iPad) |
+| Data Analysis | PostgreSQL (Supabase) |
+| Visualization | Looker Studio |
+| Version Control | GitHub |
 
 ---
 
-## Dataset
+# Dataset
 
-**Video Game Sales 1971–2024** via [Maven Analytics](https://www.mavenanalytics.io/) (free)
+**Source:** Maven Analytics – Video Game Sales Dataset  
+https://www.mavenanalytics.io/data-playground/video-game-sales
 
-64,016 titles across platforms, genres, publishers, and regional sales figures. Includes: NA, Japan, EU, and other regional sales, critic scores, and release years.
+The dataset contains **64,016 video game titles** released between **1971 and 2024**, including information such as:
 
----
+- Game title
+- Console / platform
+- Genre
+- Publisher
+- Developer
+- Release date
+- Critic score
+- Global sales
+- Regional sales:
+  - North America
+  - Japan
+  - Europe (PAL region)
+  - Other regions
 
-## Key Insights
+Sales values are recorded in **millions of units sold**.
 
-> *Full insights will be finalized on project completion. Early findings below are directional and subject to revision.*
-
-- **NA dominated global sales** throughout the 1990s–2000s, with Japan's market share declining steadily post-2010 as mobile gaming reshaped its domestic market
-- **Action and Shooter genres** account for a disproportionate share of top-selling titles, particularly from 2005 onward — coinciding with the rise of online multiplayer
-- **A small number of publishers** (Activision, EA, Rockstar, Nintendo) appear repeatedly in high-sales rankings across multiple decades and platforms, suggesting brand and franchise power outweighs novelty
-- **Sales forecast through 2027** projects continued global growth, consistent with the broader market trajectory (the global gaming market was valued at ~$184B in 2023)
-
----
-
-## Forecast Methodology
-
-The 2027 sales projection uses **Excel's FORECAST.ETS function**, which applies exponential triple smoothing (ETS) to historical annual sales totals. This method accounts for trends and seasonal patterns in time series data. Inputs are aggregated yearly global sales figures from the cleaned dataset (1971–2024), with the model extrapolating forward three years.
-
-> This is a statistical projection based on historical patterns — treat it as directional, not prescriptive.
-
----
-
-## Live Dashboard
-
-*Link will be added once dashboards are complete.*
+The original dataset was downloaded from Maven Analytics and then cleaned in Excel before being imported into PostgreSQL for analysis.
 
 ---
 
-## Project Structure
+# Methodology
+
+The analysis was completed in four main stages.
+
+## 1. Data Cleaning
+
+The raw dataset was cleaned using Excel:
+
+- Standardized date formats
+- Removed incomplete records
+- Checked for duplicate titles
+- Verified regional sales totals
+- Exported a cleaned dataset for SQL analysis
+
+---
+
+## 2. SQL Analysis
+
+PostgreSQL was used to explore trends across multiple dimensions:
+
+- Global sales by platform
+- Genre popularity trends
+- Publisher market share
+- Regional sales distribution
+- Top-selling games of all time
+
+---
+
+## 3. Data Visualization
+
+Interactive dashboards were built in **Looker Studio** to display:
+
+- Global sales trends over time
+- Platform market share
+- Genre performance
+- Regional sales comparisons
+
+---
+
+## 4. Forecasting
+
+A **time-series forecast** was created using Excel’s **FORECAST.ETS** function to estimate **global video game sales trends through 2027**.
+
+---
+
+# Key Insights
+
+*(To be completed once final analysis is finished.)*
+
+Planned insights include:
+
+- Long-term growth trends in global gaming sales
+- Platform dominance across different console generations
+- Genre popularity shifts over time
+- Regional market differences
+- Forecasted market trajectory through 2027
+
+---
+
+# Live Dashboard
+
+A public Looker Studio dashboard will be available here:
+
+**Dashboard link coming soon**
+
+The dashboard will include interactive visualizations for:
+
+- Global video game sales trends
+- Platform market share
+- Regional sales comparisons
+- Genre performance over time
+
+---
+
+# Project Structure
 
 ```
 video-game-sales-analytics/
+
 ├── data/
-│   ├── raw/          ← original Maven Analytics CSV
-│   └── clean/        ← cleaned CSV exported from Excel
+│   ├── raw/          # Original dataset
+│   └── clean/        # Cleaned dataset used for analysis
+
 ├── sql/
 │   ├── 01_schema.sql
 │   ├── 02_cleaning_queries.sql
 │   └── 03_analysis_queries.sql
+
 ├── excel/
-│   └── screenshots/  ← formulas, pivot tables, forecast sheet (coming soon)
-└── dashboards/
-    ├── screenshots/  ← Looker Studio dashboard exports (coming soon)
-    └── LINKS.md      ← live share links
+│   └── screenshots/  # Data cleaning, pivot tables, forecast model
+
+├── dashboards/
+│   ├── screenshots/  # Looker Studio dashboard previews
+│   └── LINKS.md      # Dashboard access links
 ```
 
 ---
 
-## How to Reproduce
+# How to Reproduce the Analysis
 
-1. Download raw CSV from `data/raw/` (or directly from Maven Analytics)
-2. Apply Excel cleaning steps — see `excel/screenshots/` for each stage
-3. Run `sql/` scripts in order against any PostgreSQL database
-4. Connect Looker Studio to your data source and recreate dashboards
-
----
-
-## Challenges & What I Learned
-
-Completing this project entirely on iPad Air forced creative problem-solving at every layer. Supabase's browser-based SQL editor replaced a desktop client entirely. Excel on iPad handled 64k rows of cleaning and forecasting without issue, though pivot table workflows required adapting to a touch-first interface. Looker Studio's web app connected seamlessly.
-
-The biggest challenge was managing a multi-tool workflow — cleaning in Excel, analyzing in SQL, visualizing in Looker Studio — with no desktop to act as a central hub. That constraint pushed better discipline around file naming, version control via GitHub, and keeping each layer of the project cleanly separated.
-
-The takeaway: cloud-first tooling has matured enough that a laptop is no longer a prerequisite for serious data work.
+1. Download the raw dataset from `data/raw/` or from Maven Analytics.
+2. Follow the Excel data cleaning steps shown in `excel/screenshots/`.
+3. Import the cleaned dataset into a PostgreSQL database.
+4. Run the SQL scripts in the `sql/` folder in order.
+5. Connect Looker Studio to the database and recreate the dashboards.
 
 ---
 
-## Macro Context
+# Industry Context
 
-Channel-level sales projections are directionally validated against publicly reported gaming industry revenue figures. The global video game market was valued at approximately $184 billion in 2023 and is projected to grow consistently through 2027.
+The video game industry has grown into one of the largest entertainment sectors globally.
+
+Industry reports estimate the **global gaming market was valued at approximately $184 billion in 2023**, with continued growth expected through **2027**, driven by:
+
+- Digital distribution
+- Expanding global audiences
+- Mobile gaming
+- Cross-platform ecosystems
 
 ---
 
-## Limitations
+# Limitations
 
-- Sales figures represent physical and digital reported units — not all digital sales are captured in this dataset
-- Data reflects titles with documented sales records — indie and smaller releases may be underrepresented
-- 2027 forecast is a statistical projection based on historical trends, not a guarantee — treat as directional, not precise
+- Sales figures represent **reported unit sales** and may not capture all digital purchases.
+- Some **indie and smaller titles** may be missing due to limited available data.
+- Regional groupings are aggregated and may not represent individual country markets.
+- The **2027 forecast** is based on historical trends and statistical modelling, and should be interpreted as a **directional estimate rather than a precise prediction**.
 
 ---
 
-💡 *This entire project was completed on iPad Air using only cloud-based tools — no laptop required at any stage.*
+# Note
+
+💡 This entire project was completed using **only an iPad Air and cloud-based tools**, demonstrating that a full data analytics workflow can be completed without a traditional laptop or desktop environment.
