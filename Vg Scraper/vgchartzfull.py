@@ -8,7 +8,7 @@ import time
 # -----------------------------
 # SETTINGS
 # -----------------------------
-pages = 200  # increase as needed
+pages = 10   # 🔹 TEST FIRST (we’ll increase later)
 sleep_time = 0.3
 
 headers = {
@@ -52,19 +52,23 @@ def fetch(url):
 # -----------------------------
 # MAIN LOOP
 # -----------------------------
-for page in range(1, pages):
+for page in range(1, pages + 1):
     try:
         surl = urlhead + str(page) + urltail
         r = fetch(surl)
         soup = BeautifulSoup(r, "lxml")
 
-        print(f"Page: {page}")
+        print(f"\nPage: {page}")
 
-        # ✅ FIXED href handling (keeps original logic)
+        # SAFE href filter (keeps original working logic)
         game_tags = list(filter(
             lambda x: 'href' in x.attrs and '/game/' in x.attrs['href'],
             soup.find_all("a")
-        ))[10:]
+        ))
+
+        # remove navigation links
+        if len(game_tags) > 10:
+            game_tags = game_tags[10:]
 
         for tag in game_tags:
             try:
@@ -72,11 +76,11 @@ for page in range(1, pages):
                 if not name:
                     continue
 
-                print(f"{rec_count + 1} Fetch data for {name}")
-
                 data = tag.parent.parent.find_all("td")
                 if len(data) < 14:
                     continue
+
+                print(f"{rec_count + 1} - {name}")
 
                 # -----------------------------
                 # CORE DATA
@@ -142,13 +146,10 @@ for page in range(1, pages):
                         year.append(np.int32(release_year))
 
                 # -----------------------------
-                # GENRE (kept intact but safer)
+                # GENRE
                 # -----------------------------
                 href = tag.attrs['href']
-                if href.startswith("/"):
-                    url_to_game = base_url + href
-                else:
-                    url_to_game = href
+                url_to_game = base_url + href if href.startswith("/") else href
 
                 try:
                     site_raw = fetch(url_to_game)
@@ -177,10 +178,10 @@ for page in range(1, pages):
                 rec_count += 1
 
                 # -----------------------------
-                # 💾 BACKUP EVERY 200 ROWS
+                # 💾 BACKUP
                 # -----------------------------
                 if rec_count % 200 == 0:
-                    df_temp = pd.DataFrame({
+                    pd.DataFrame({
                         'Rank': rank,
                         'Name': gname,
                         'Platform': platform,
@@ -195,14 +196,13 @@ for page in range(1, pages):
                         'JP_Sales': sales_jp,
                         'Other_Sales': sales_ot,
                         'Global_Sales': sales_gl
-                    })
-                    df_temp.to_csv("vgsales_backup.csv", index=False)
+                    }).to_csv("vgsales_backup.csv", index=False)
                     print("💾 Backup saved")
 
                 time.sleep(sleep_time)
 
             except Exception as e:
-                print("Skipping row:", e)
+                print("Skip:", e)
                 continue
 
     except Exception as e:
@@ -229,7 +229,7 @@ df = pd.DataFrame({
     'Global_Sales': sales_gl
 })
 
-print(f"Total records scraped: {rec_count}")
+print(f"\nTotal records scraped: {rec_count}")
 
 df.to_csv("vgsales.csv", index=False)
-print("Saved to vgsales.csv")
+print("✅ Saved to vgsales.csv")
